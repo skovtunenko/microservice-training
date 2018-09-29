@@ -44,3 +44,24 @@ Where `8080:localhost:8080` will map remote EC2 host to localhost:8080.
 > ssh -i "sigma-aws.pem" ec2-user@ec2-34-201-167-90.compute-1.amazonaws.com -L 8080:localhost:8080 -L 9080:vpc-sigma-aws-gnurpfe3gkw4y7h7pzgcy6ldly.us-east-1.es.amazonaws.com:80
 
 Where `-L 9080:vpc-sigma-aws-gnurpfe3gkw4y7h7pzgcy6ldly.us-east-1.es.amazonaws.com:80` will map remote AWS Elasticsearch host to localhost:9080.
+
+----
+
+## S3:
+Bucket name: `sigma-aws-skovtunenko`
+
+----
+
+## Intall LocalStack
+> docker run -d -e "SERVICES=s3,sqs" -p 4572:4572 -p 4576:4576 --name localstack localstack/localstack
+
+...and check logs:
+> docker logs localstack
+
+Then you can interact with localstack this way:
+> aws s3 --endpoint-url=http://localhost:4572 mb s3://sigma.files
+
+where `http://localhost:4572` will point to localstack's S3 service! 
+
+----
+
