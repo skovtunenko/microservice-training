@@ -20,6 +20,8 @@ import (
 	"net/http"
 	"strconv"
 
+	_ "net/http/pprof"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
@@ -40,7 +42,20 @@ var (
 // Handlers
 //----------
 
-func createUser(c echo.Context) error {
+func greetingHandler(c echo.Context) error {
+	type Greeting struct {
+		Msg string `json:"msg"`
+	}
+	g := &Greeting{
+		"Hello, stranger",
+	}
+	if err := c.Bind(g); err != nil {
+		return err
+	}
+	return c.JSON(http.StatusCreated, g)
+}
+
+func createUserHandler(c echo.Context) error {
 	u := &user{
 		ID: seq,
 	}
@@ -52,12 +67,12 @@ func createUser(c echo.Context) error {
 	return c.JSON(http.StatusCreated, u)
 }
 
-func getUser(c echo.Context) error {
+func getUserHandler(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	return c.JSON(http.StatusOK, users[id])
 }
 
-func updateUser(c echo.Context) error {
+func updateUserHandler(c echo.Context) error {
 	u := new(user)
 	if err := c.Bind(u); err != nil {
 		return err
@@ -67,7 +82,7 @@ func updateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, users[id])
 }
 
-func deleteUser(c echo.Context) error {
+func deleteUserHandler(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	delete(users, id)
 	return c.NoContent(http.StatusNoContent)
@@ -81,11 +96,12 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// Routes
-	e.POST("/users", createUser)
-	e.GET("/users/:id", getUser)
-	e.PUT("/users/:id", updateUser)
-	e.DELETE("/users/:id", deleteUser)
+	e.GET("/", greetingHandler)
+	e.POST("/api/users", createUserHandler)
+	e.GET("/api/users/:id", getUserHandler)
+	e.PUT("/api/users/:id", updateUserHandler)
+	e.DELETE("/api/users/:id", deleteUserHandler)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
