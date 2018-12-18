@@ -16,7 +16,7 @@ func GreetingHandler(c echo.Context) error {
 		Msg string `json:"msg"`
 	}
 	g := &Greeting{
-		"Hello, stranger",
+		"Hello, Exadel developers!",
 	}
 	if err := c.Bind(g); err != nil {
 		return err
