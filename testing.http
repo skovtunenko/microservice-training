@@ -17,4 +17,5 @@ Content-Type: application/json
 ### Greetings page:
 GET http://localhost:8080/greet
 
-###
+### PPROF endpoint:
+GET http://localhost:8080/debug/pprof/
