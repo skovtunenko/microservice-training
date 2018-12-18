@@ -23,7 +23,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	echopprof "github.com/sevenNt/echo-pprof"
 
-	"github.com/skovtunenko/microservice-training/pkg"
+	"github.com/exadel/aws-workshop/pkg"
 )
 
 func main() {

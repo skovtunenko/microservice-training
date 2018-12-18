@@ -1,4 +1,4 @@
-module github.com/skovtunenko/microservice-training
+module github.com/exadel/aws-workshop
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
