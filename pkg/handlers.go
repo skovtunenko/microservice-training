@@ -21,7 +21,7 @@ func GreetingHandler(c echo.Context) error {
 	if err := c.Bind(g); err != nil {
 		return err
 	}
-	return c.JSON(http.StatusCreated, g)
+	return c.JSON(http.StatusOK, g)
 }
 
 func CreateUserHandler(c echo.Context) error {

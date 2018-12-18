@@ -39,7 +39,7 @@ func main() {
 	})
 	echopprof.Wrap(e) // automatically add routers for net/http/pprof e.g. /debug/pprof, /debug/pprof/heap, etc.
 
-	e.GET("/greet", pkg.GreetingHandler)
+	e.GET("/", pkg.GreetingHandler)
 	e.POST("/api/users", pkg.CreateUserHandler)
 	e.GET("/api/users/:id", pkg.GetUserHandler)
 	e.PUT("/api/users/:id", pkg.UpdateUserHandler)

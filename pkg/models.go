@@ -5,13 +5,7 @@ type User struct {
 	Name string `json:"name"`
 }
 
-//type Users struct {
-//	sync.RWMutex
-//	data map[int]*User
-//	seq  int
-//}
-
 var (
-	users = map[int]*User{}
+	users = map[int]*User{} // not thread safe for simplicity!
 	seq   = 1
 )

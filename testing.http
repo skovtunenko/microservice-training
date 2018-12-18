@@ -5,17 +5,30 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-# Create new user:
+### Greetings page:
+GET http://localhost:8080
+
+### Create new `Ivan` user:
 POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-  "ID": 1,
   "Name": "Ivan"
 }
 
-### Greetings page:
-GET http://localhost:8080/greet
+### Create new `Sergio` user:
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "id": 777,
+  "Name": "Sergio"
+}
+
+### Get user:
+GET http://localhost:8080/api/users/777
 
 ### PPROF endpoint:
 GET http://localhost:8080/debug/pprof/
+
+###
